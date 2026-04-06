@@ -334,6 +334,24 @@ function TopicCard({
               )
             })}
           </div>
+
+          {isImportant && (
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <a
+                href="tel:88002000122"
+                className="group flex items-center gap-3 rounded-full border border-pink-300/40 bg-pink-300/10 px-6 py-3 transition-all duration-300 hover:bg-pink-300/20 hover:border-pink-300/60 hover:scale-105"
+              >
+                <Icon name="Phone" size={16} className="text-pink-200/90 group-hover:animate-pulse" />
+                <span className="font-sans text-sm font-medium text-foreground/90">
+                  Позвонить на линию помощи
+                </span>
+                <span className="font-mono text-sm text-pink-200/80">
+                  8-800-200-01-22
+                </span>
+              </a>
+              <p className="font-mono text-xs text-foreground/40">Бесплатно · Анонимно · Круглосуточно</p>
+            </div>
+          )}
         </div>
       )}
     </div>
