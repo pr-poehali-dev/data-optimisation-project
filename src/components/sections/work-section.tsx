@@ -2,7 +2,19 @@ import { useState } from "react"
 import { useReveal } from "@/hooks/use-reveal"
 import Icon from "@/components/ui/icon"
 
-const topics = [
+const topics: {
+  number: string
+  title: string
+  category: string
+  tag: string
+  direction: string
+  icon: string
+  accent?: string
+  content: {
+    intro: string
+    sections: { heading: string; items: string[] }[]
+  }
+}[] = [
   {
     number: "01",
     title: "Беременность",
@@ -123,6 +135,69 @@ const topics = [
       ],
     },
   },
+  {
+    number: "04",
+    title: "Послеродовая депрессия",
+    category: "Признаки, помощь и поддержка",
+    tag: "Важно",
+    direction: "right",
+    icon: "HeartHandshake",
+    accent: "border-pink-300/40",
+    content: {
+      intro: "Послеродовая депрессия — это не слабость и не плохое материнство. Это медицинское состояние, которое встречается у каждой 5-й мамы. Главное — вовремя распознать и не оставаться с этим один на один.",
+      sections: [
+        {
+          heading: "🚨 Первые признаки — на что обратить внимание",
+          items: [
+            "Постоянная плаксивость без видимой причины — слёзы несколько дней подряд",
+            "Ощущение пустоты или равнодушия к ребёнку — «я должна любить, но ничего не чувствую»",
+            "Тревога, которая не проходит: страх навредить малышу, страх остаться наедине с ним",
+            "Бессонница даже когда ребёнок спит — мысли не дают отдохнуть",
+            "Раздражительность и вспышки гнева на близких без повода",
+            "Ощущение, что вы «плохая мать», вина и стыд за свои чувства",
+            "Потеря аппетита или, наоборот, постоянное заедание тревоги",
+            "Мысли о том, что всем было бы лучше без вас — это серьёзный сигнал, нужна срочная помощь",
+          ],
+        },
+        {
+          heading: "✅ Что делать — шаги к выходу",
+          items: [
+            "Признать: то, что вы чувствуете — реально и требует внимания, а не игнорирования",
+            "Рассказать близкому человеку — мужу, маме, подруге. Молчание усугубляет состояние",
+            "Обратиться к врачу: терапевт или психиатр поставят диагноз и при необходимости назначат лечение",
+            "Психотерапия: когнитивно-поведенческая терапия (КПТ) показывает лучшие результаты при ПРД",
+            "Группы поддержки для мам — живые и онлайн, где можно говорить честно без осуждения",
+            "Принять помощь: разрешить близким взять малыша, чтобы вы могли поспать и восстановиться",
+            "Телефон доверия: 8-800-2000-122 (бесплатно, круглосуточно, по всей России)",
+          ],
+        },
+        {
+          heading: "Куда обратиться за помощью",
+          items: [
+            "👩‍⚕️ Участковый терапевт или акушер-гинеколог — первый шаг, направят к специалисту",
+            "🧠 Психиатр или психотерапевт — не страшно, это медицинская помощь как при любой болезни",
+            "📞 Телефон доверия: 8-800-2000-122 — бесплатно, анонимно, 24/7",
+            "💬 Чат психологической помощи: pomoschryadom.ru — онлайн, бесплатно",
+            "👥 Группы поддержки мам: ищите в Telegram по запросу «послеродовая депрессия поддержка»",
+            "🏥 ПНД по месту жительства — консультация бесплатна по полису ОМС",
+          ],
+        },
+        {
+          heading: "🚫 Что категорически нельзя делать",
+          items: [
+            "Молчать и ждать, что «само пройдёт» — без помощи состояние усугубляется неделями и месяцами",
+            "Стыдиться своих чувств и скрывать их от врача — врачи не осудят, они помогут",
+            "Пить алкоголь «чтобы расслабиться» — алкоголь при депрессии резко ухудшает состояние",
+            "Самостоятельно принимать антидепрессанты или успокоительные без назначения врача",
+            "Оставаться в изоляции — уходить от общения, запираться дома, отказываться от помощи",
+            "Читать истории «у меня всё плохо навсегда» в интернете — это не ваша история",
+            "Сравнивать себя с «идеальными мамами» из соцсетей — там не показывают правду",
+            "Игнорировать мысли о причинении вреда себе или ребёнку — при их появлении вызывайте скорую немедленно",
+          ],
+        },
+      ],
+    },
+  },
 ]
 
 export function WorkSection() {
@@ -183,6 +258,8 @@ function TopicCard({
     return "translate-x-0 opacity-100"
   }
 
+  const isImportant = topic.tag === "Важно"
+
   return (
     <div
       className={`transition-all duration-700 ${getRevealClass()}`}
@@ -190,16 +267,27 @@ function TopicCard({
     >
       <button
         onClick={onToggle}
-        className="group flex w-full items-center justify-between border-b border-foreground/10 py-5 text-left transition-all duration-300 hover:border-foreground/30 md:py-7"
+        className={`group flex w-full items-center justify-between border-b py-5 text-left transition-all duration-300 md:py-7 ${
+          isImportant
+            ? "border-pink-300/30 hover:border-pink-300/60"
+            : "border-foreground/10 hover:border-foreground/30"
+        }`}
       >
         <div className="flex items-center gap-4 md:gap-8">
           <span className="font-mono text-sm text-foreground/30 group-hover:text-foreground/50 md:text-base">
             {topic.number}
           </span>
           <div>
-            <h3 className="mb-0.5 font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-1 md:text-3xl lg:text-4xl">
-              {topic.title}
-            </h3>
+            <div className="mb-0.5 flex items-center gap-3">
+              <h3 className="font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-1 md:text-3xl lg:text-4xl">
+                {topic.title}
+              </h3>
+              {isImportant && (
+                <span className="rounded-full bg-pink-300/20 px-2.5 py-0.5 font-mono text-xs text-pink-200/90 border border-pink-300/30">
+                  Важно знать
+                </span>
+              )}
+            </div>
             <p className="font-mono text-xs text-foreground/50 md:text-sm">{topic.category}</p>
           </div>
         </div>
@@ -212,25 +300,39 @@ function TopicCard({
       </button>
 
       {isExpanded && (
-        <div className="border-b border-foreground/10 py-6 md:py-8">
+        <div className={`border-b py-6 md:py-8 ${isImportant ? "border-pink-300/20" : "border-foreground/10"}`}>
+          {isImportant && (
+            <div className="mb-5 flex items-start gap-3 rounded-xl border border-pink-300/25 bg-pink-300/5 p-4">
+              <Icon name="HeartHandshake" size={18} className="mt-0.5 shrink-0 text-pink-300/70" />
+              <p className="text-sm leading-relaxed text-foreground/80">
+                Ты не одна — и это не твоя вина. Послеродовая депрессия лечится, и тысячи мам прошли через это и стали счастливы. Главное — не молчать.
+              </p>
+            </div>
+          )}
           <p className="mb-6 max-w-3xl text-sm leading-relaxed text-foreground/70 md:text-base">{topic.content.intro}</p>
           <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
-            {topic.content.sections.map((section, si) => (
-              <div key={si} className={si === topic.content.sections.length - 1 && topic.content.sections.length % 2 !== 0 ? "md:col-span-2" : ""}>
-                <div className="mb-3 flex items-center gap-2">
-                  <div className="h-px w-6 bg-foreground/30" />
-                  <h4 className="font-mono text-xs text-foreground/60 uppercase tracking-wider">{section.heading}</h4>
+            {topic.content.sections.map((section, si) => {
+              const isLastOdd = si === topic.content.sections.length - 1 && topic.content.sections.length % 2 !== 0
+              const isDanger = section.heading.includes("нельзя")
+              return (
+                <div key={si} className={isLastOdd ? "md:col-span-2" : ""}>
+                  <div className="mb-3 flex items-center gap-2">
+                    <div className={`h-px w-6 ${isDanger ? "bg-red-300/50" : "bg-foreground/30"}`} />
+                    <h4 className={`font-mono text-xs uppercase tracking-wider ${isDanger ? "text-red-300/70" : "text-foreground/60"}`}>
+                      {section.heading}
+                    </h4>
+                  </div>
+                  <ul className="space-y-2">
+                    {section.items.map((item, ii) => (
+                      <li key={ii} className="flex gap-2 text-sm leading-relaxed text-foreground/80">
+                        <span className={`mt-1.5 h-1 w-1 shrink-0 rounded-full ${isDanger ? "bg-red-300/50" : "bg-foreground/30"}`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-2">
-                  {section.items.map((item, ii) => (
-                    <li key={ii} className="flex gap-2 text-sm leading-relaxed text-foreground/80">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground/30" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       )}

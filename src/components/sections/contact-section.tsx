@@ -73,28 +73,11 @@ export function ContactSection() {
                 </p>
               </a>
 
-              <a
-                href="tel:+79610476807"
-                className={`group block transition-all duration-700 ${
-                  isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
-                }`}
-                style={{ transitionDelay: "320ms" }}
-              >
-                <div className="mb-1 flex items-center gap-2">
-                  <Icon name="Phone" size={12} className="text-foreground/60" />
-                  <span className="font-mono text-xs text-foreground/60">Горячая линия для мам</span>
-                </div>
-                <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-xl">
-                  8 961 047-68-07
-                </p>
-                <p className="mt-0.5 font-mono text-xs text-foreground/40">Бесплатно, круглосуточно</p>
-              </a>
-
               <div
                 className={`transition-all duration-700 ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
                 }`}
-                style={{ transitionDelay: "440ms" }}
+                style={{ transitionDelay: "320ms" }}
               >
                 <div className="mb-1 flex items-center gap-2">
                   <Icon name="MapPin" size={12} className="text-foreground/60" />
