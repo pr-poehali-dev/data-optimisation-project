@@ -1,7 +1,7 @@
-import { Mail, MapPin } from "lucide-react"
 import { useReveal } from "@/hooks/use-reveal"
 import { useState, type FormEvent } from "react"
 import { MagneticButton } from "@/components/magnetic-button"
+import Icon from "@/components/ui/icon"
 
 export function ContactSection() {
   const { ref, isVisible } = useReveal(0.3)
@@ -51,41 +51,58 @@ export function ContactSection() {
               <p className="font-mono text-xs text-foreground/60 md:text-base">/ Напишите нам</p>
             </div>
 
-            <div className="space-y-4 md:space-y-8">
+            <div className="space-y-5 md:space-y-7">
               <a
-                href="mailto:hello@mamagid.ru"
+                href="mailto:cofa0199@gmail.com"
                 className={`group block transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
                 }`}
                 style={{ transitionDelay: "200ms" }}
               >
                 <div className="mb-1 flex items-center gap-2">
-                  <Mail className="h-3 w-3 text-foreground/60" />
+                  <Icon name="Mail" size={12} className="text-foreground/60" />
                   <span className="font-mono text-xs text-foreground/60">Email</span>
                 </div>
-                <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
-                  hello@mamagid.ru
+                <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-xl">
+                  cofa0199@gmail.com
                 </p>
+              </a>
+
+              <a
+                href="tel:+78001234567"
+                className={`group block transition-all duration-700 ${
+                  isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
+                }`}
+                style={{ transitionDelay: "320ms" }}
+              >
+                <div className="mb-1 flex items-center gap-2">
+                  <Icon name="Phone" size={12} className="text-foreground/60" />
+                  <span className="font-mono text-xs text-foreground/60">Горячая линия для мам</span>
+                </div>
+                <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-xl">
+                  8 800 123-45-67
+                </p>
+                <p className="mt-0.5 font-mono text-xs text-foreground/40">Бесплатно, круглосуточно</p>
               </a>
 
               <div
                 className={`transition-all duration-700 ${
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
                 }`}
-                style={{ transitionDelay: "350ms" }}
+                style={{ transitionDelay: "440ms" }}
               >
                 <div className="mb-1 flex items-center gap-2">
-                  <MapPin className="h-3 w-3 text-foreground/60" />
+                  <Icon name="MapPin" size={12} className="text-foreground/60" />
                   <span className="font-mono text-xs text-foreground/60">Локация</span>
                 </div>
-                <p className="text-base text-foreground md:text-2xl">Россия, для всех мам</p>
+                <p className="text-base text-foreground md:text-xl">Россия, для всех мам</p>
               </div>
 
               <div
-                className={`flex gap-2 pt-2 transition-all duration-700 md:pt-4 ${
+                className={`flex gap-2 pt-1 transition-all duration-700 md:pt-2 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                 }`}
-                style={{ transitionDelay: "500ms" }}
+                style={{ transitionDelay: "560ms" }}
               >
                 {["Telegram", "VK", "Instagram", "YouTube"].map((social) => (
                   <a
