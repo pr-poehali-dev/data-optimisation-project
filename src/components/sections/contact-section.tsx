@@ -19,15 +19,20 @@ export function ContactSection() {
 
     setIsSubmitting(true)
 
-    // Simulate form submission (replace with actual API call later)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: "", email: "", message: "" })
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
+    try {
+      const res = await fetch("https://functions.poehali.dev/f6fc237a-8302-4248-9b5f-78b63990601b", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setSubmitSuccess(true)
+        setFormData({ name: "", email: "", message: "" })
+        setTimeout(() => setSubmitSuccess(false), 6000)
+      }
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -69,7 +74,7 @@ export function ContactSection() {
               </a>
 
               <a
-                href="tel:+78001234567"
+                href="tel:+79610476807"
                 className={`group block transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
                 }`}
@@ -80,7 +85,7 @@ export function ContactSection() {
                   <span className="font-mono text-xs text-foreground/60">Горячая линия для мам</span>
                 </div>
                 <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-xl">
-                  8 800 123-45-67
+                  8 961 047-68-07
                 </p>
                 <p className="mt-0.5 font-mono text-xs text-foreground/40">Бесплатно, круглосуточно</p>
               </a>
