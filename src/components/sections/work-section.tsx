@@ -200,9 +200,12 @@ const topics: {
   },
 ]
 
+const DEPRESSION_INDEX = topics.findIndex((t) => t.tag === "Важно")
+
 export function WorkSection() {
   const { ref, isVisible } = useReveal(0.3)
   const [expanded, setExpanded] = useState<number | null>(null)
+  const showBanner = expanded === DEPRESSION_INDEX
 
   return (
     <section
@@ -233,6 +236,27 @@ export function WorkSection() {
             />
           ))}
         </div>
+      </div>
+
+      {/* Плавающий баннер линии помощи */}
+      <div
+        className={`fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 ${
+          showBanner ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-16 opacity-0 pointer-events-none"
+        }`}
+      >
+        <a
+          href="tel:88002000122"
+          className="group flex items-center gap-3 rounded-full border border-pink-300/50 bg-black/60 px-5 py-3 shadow-lg shadow-pink-900/20 backdrop-blur-md transition-all duration-300 hover:bg-pink-300/20 hover:border-pink-300/80 hover:scale-105"
+        >
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pink-300/20 group-hover:bg-pink-300/30">
+            <Icon name="Phone" size={14} className="text-pink-200 group-hover:animate-pulse" />
+          </span>
+          <div className="flex flex-col leading-tight">
+            <span className="font-sans text-xs font-medium text-foreground/90">Линия психологической помощи</span>
+            <span className="font-mono text-xs text-pink-200/80">8-800-200-01-22 · бесплатно</span>
+          </div>
+          <Icon name="ArrowRight" size={14} className="text-foreground/40 group-hover:text-foreground/70 transition-colors" />
+        </a>
       </div>
     </section>
   )
